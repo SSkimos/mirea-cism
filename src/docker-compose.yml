@@ -10,7 +10,7 @@ services:
       dockerfile: ./documents/Dockerfile
     env_file: ./documents/.env
     ports:
-      - "3000:3000"
+      - "5001:5001"
     networks:
       - api-gateway
 
@@ -24,7 +24,7 @@ services:
       dockerfile: ./printers/Dockerfile
     env_file: ./printers/.env
     ports:
-      - "3000:3000"
+      - "5002:5002"
     networks:
       - api-gateway
   #####################
@@ -33,7 +33,7 @@ services:
   proxy:
     build:
       context: .
-      
+
     restart: always
     ports:
       - 8080:8080

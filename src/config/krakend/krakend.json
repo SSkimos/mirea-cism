@@ -4,39 +4,27 @@
     "endpoints": [
         {
             "endpoint": "/documents",
-            "method": "GET",
-            "output_encoding": "no-op",
-            "extra_config": {},
+            "output_encoding": "json",
             "backend": [
                 {
-                    "url_pattern": "/",
-                    "encoding": "no-op",
-                    "sd": "static",
-                    "method": "GET",
-                    "extra_config": {},
                     "host": [
-                        "http://host.docker.internal:5000"
+                        "http://localhost:5001"
                     ],
-                    "disable_host_sanitize": true
+                    "url_pattern": "/",
+                    "encoding": "json"
                 }
             ]
         },
         {
             "endpoint": "/printers",
-            "method": "GET",
-            "output_encoding": "no-op",
-            "extra_config": {},
+            "output_encoding": "json",
             "backend": [
                 {
-                    "url_pattern": "/",
-                    "encoding": "no-op",
-                    "sd": "static",
-                    "method": "GET",
-                    "extra_config": {},
                     "host": [
-                        "http://host.docker.internal:5000"
+                        "http://localhost:5002"
                     ],
-                    "disable_host_sanitize": true
+                    "url_pattern": "/",
+                    "encoding": "json"
                 }
             ]
         }
