@@ -14,7 +14,6 @@ services:
 
   documents:
     build: documents/
-    command: python ./app/documents.py
     ports:
       - "5001:5001"
     depends_on:
@@ -22,7 +21,6 @@ services:
 
   printers:
     build: printers/
-    command: python ./app/printers.py
     ports:
       - "5002:5002"
     depends_on:
