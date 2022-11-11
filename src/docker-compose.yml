@@ -1,27 +1,48 @@
-version: "3"
+version: '3.8'
 services:
-  krakend:
-    container_name: krakend
-    image: devopsfaith/krakend:latest
-    volumes:
-      - ./config/krakend
-    ports:
-      - "5000:5000"
-      - "8090:8090"
-
+  #####################
+  # Book Service
+  #####################
   documents:
-    build: documents/
-    command: python3 ./documents.py
+    restart: always
+    build:
+      context: .
+      dockerfile: ./documents/Dockerfile
+    env_file: ./documents/.env
     ports:
-      - "4000:3000"
-    depends_on:
-      - krakend
+      - "3000:3000"
+    networks:
+      - api-gateway
 
-
+  #####################
+  # Author Service
+  #####################
   printers:
-    build: printers/
-    command: python3 ./printers.py
+    restart: always
+    build:
+      context: .
+      dockerfile: ./printers/Dockerfile
+    env_file: ./printers/.env
     ports:
-      - "4000:3000"
+      - "3000:3000"
+    networks:
+      - api-gateway
+  #####################
+  # krakend Service
+  #####################
+  proxy:
+    build:
+      context: .
+      
+    restart: always
+    ports:
+      - 8080:8080
+      - 8090:8090
     depends_on:
-      - krakend
+      - documents
+      - printers
+    networks:
+      - api-gateway
+
+networks:
+  api-gateway:
