@@ -1,48 +1,29 @@
-version: '3.8'
+version: "3"
 services:
-  #####################
-  # Book Service
-  #####################
+  krakend:
+    # The :watch image restarts the service automatically when the configuration files change.
+    # Do not use this image in production, it's meant to speed up your testing and development.
+    image: devopsfaith/krakend:watch
+    volumes:
+      - ./config/krakend:/etc/krakend
+    ports:
+      - "1234:1234"
+      - "8080:8080"
+      - "8090:8090"
+    command: ["run", "-d", "-c", "./config/krakend/krakend.json"]
+
   documents:
-    restart: always
-    build:
-      context: .
-      dockerfile: ./documents/Dockerfile
-    env_file: ./documents/.env
+    build: documents/
+    command: python ./app/documents.py
     ports:
       - "5001:5001"
-    networks:
-      - api-gateway
+    depends_on:
+      - krakend
 
-  #####################
-  # Author Service
-  #####################
   printers:
-    restart: always
-    build:
-      context: .
-      dockerfile: ./printers/Dockerfile
-    env_file: ./printers/.env
+    build: printers/
+    command: python ./app/printers.py
     ports:
       - "5002:5002"
-    networks:
-      - api-gateway
-  #####################
-  # krakend Service
-  #####################
-  proxy:
-    build:
-      context: .
-
-    restart: always
-    ports:
-      - 8080:8080
-      - 8090:8090
     depends_on:
-      - documents
-      - printers
-    networks:
-      - api-gateway
-
-networks:
-  api-gateway:
+      - krakend
