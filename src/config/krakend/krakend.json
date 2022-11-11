@@ -3,8 +3,9 @@
     "name": "simpleapi gw",
     "endpoints": [
         {
-            "endpoint": "/documents/",
+            "endpoint": "/documents",
             "output_encoding": "json",
+            "method": "GET",
             "backend": [
                 {
                     "host": [
@@ -16,8 +17,9 @@
             ]
         },
         {
-            "endpoint": "/printers/",
+            "endpoint": "/printers",
             "output_encoding": "json",
+            "method": "GET",
             "backend": [
                 {
                     "host": [
