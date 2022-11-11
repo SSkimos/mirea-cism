@@ -1,0 +1,44 @@
+{
+    "version": 3,
+    "name": "simpleapi gw",
+    "endpoints": [
+        {
+            "endpoint": "/documents",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {},
+            "backend": [
+                {
+                    "url_pattern": "/",
+                    "encoding": "no-op",
+                    "sd": "static",
+                    "method": "GET",
+                    "extra_config": {},
+                    "host": [
+                        "http://host.docker.internal:5000"
+                    ],
+                    "disable_host_sanitize": true
+                }
+            ]
+        },
+        {
+            "endpoint": "/printers",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "extra_config": {},
+            "backend": [
+                {
+                    "url_pattern": "/",
+                    "encoding": "no-op",
+                    "sd": "static",
+                    "method": "GET",
+                    "extra_config": {},
+                    "host": [
+                        "http://host.docker.internal:5000"
+                    ],
+                    "disable_host_sanitize": true
+                }
+            ]
+        }
+    ]
+}

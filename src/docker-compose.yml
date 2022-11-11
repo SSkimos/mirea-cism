@@ -1,0 +1,27 @@
+version: "3"
+services:
+  krakend:
+    container_name: krakend
+    image: devopsfaith/krakend:latest
+    volumes:
+      - ./config/krakend
+    ports:
+      - "5000:5000"
+      - "8090:8090"
+
+  documents:
+    build: documents/
+    command: python3 ./documents.py
+    ports:
+      - "4000:3000"
+    depends_on:
+      - krakend
+
+
+  printers:
+    build: printers/
+    command: python3 ./printers.py
+    ports:
+      - "4000:3000"
+    depends_on:
+      - krakend
