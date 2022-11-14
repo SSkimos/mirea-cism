@@ -9,7 +9,7 @@
             "backend": [
                 {
                     "host": [
-                        "http://localhost:5001"
+                        "http://documents:5001"
                     ],
                     "url_pattern": "/",
                     "encoding": "json"
@@ -23,7 +23,7 @@
             "backend": [
                 {
                     "host": [
-                        "http://localhost:5002"
+                        "http://printers:5002"
                     ],
                     "url_pattern": "/",
                     "encoding": "json"

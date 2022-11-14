@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def basic():
-    return {"Hello": "documents"}
+    return {"Hello": "printers"}
 
 @app.get("/printers/")
 def read_root():
