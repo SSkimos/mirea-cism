@@ -6,6 +6,16 @@
             "endpoint": "/documents",
             "output_encoding": "json",
             "method": "GET",
+            "extra_config": {
+              "auth/validator": {
+                    "alg": "RS256",
+                    "audience": ["http://localhost:9080"],
+                    "roles_key": "http://localhost:9080/custom/roles",
+                    "roles": ["user", "admin"],
+                    "jwk_url": "http://localhost:9080/.well-known/jwks.json",
+                    "cache": true
+                }
+            },
             "backend": [
                 {
                     "host": [
