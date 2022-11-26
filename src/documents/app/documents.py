@@ -9,31 +9,16 @@ from opentracing_instrumentation.request_context import get_current_span, span_i
 app = FastAPI()
 
 
-def init_tracer(service):
-    logging.getLogger('').handlers = []
-    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
-    config = Config(
-        config={
-            'sampler': {
-                'type': 'const',
-                'param': 1,
-            },
-            'logging': True,
-        },
-        service_name=service,
-    )
-    return config.initialize_tracer()
-
-
 @app.get("/")
-def basic():
-    tracer = init_tracer('test')
-    with tracer.start_span('test') as span:
-        span.set_tag('test', 'aboba')
-    # tracer.close()
+def get_main():
     return {"Hello": "documents"}
 
 
-@app.get("/documents/")
-def read_root():
-    return {"Hello": "documents"}
+@app.get("/main")
+def get_main():
+    return {"foo": "hello", "first": "amigo"}
+
+
+@app.get("/person")
+def get_person():
+    return {"name": "John Gold", "age": "75"}

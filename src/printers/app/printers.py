@@ -3,10 +3,16 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+
 @app.get("/")
-def basic():
+def get_main():
     return {"Hello": "printers"}
 
-@app.get("/printers/")
+
+@app.get("/main")
+def basic():
+    return {"bar": "hola", "second": "world"}
+
+@app.get("/person")
 def read_root():
-    return {"Hello": "printers"}
+    return {"profession": "Developer", "company": "some"}
